@@ -8,7 +8,17 @@ router.get('/', async (req, res) => {
     const perfumes = await PerfumeModel.find({});
     res.json(perfumes);
   } catch (error) {
-    res.status(400).json({ message: error.message });
+    res.status(400).json({ status: 400, message: error.message });
+  }
+});
+
+router.post('/', async (req, res) => {
+  try {
+    const postData = req.body
+    const newPerfume = await PerfumeModel.create(postData);
+    res.json(newPerfume);
+  } catch (error) {
+    res.status(400).json({ status: 400, message: error.message });
   }
 });
 

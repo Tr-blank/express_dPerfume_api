@@ -1,6 +1,7 @@
 const express = require('express')
 const mongoose = require('mongoose');
-var perfumesRouter = require('./routes/perfumes');
+const indexRouter = require('./routes');
+const perfumesRouter = require('./routes/perfumes');
 const app = express()
 const port = 3000
 
@@ -15,10 +16,9 @@ mongoose
     console.log(error);
   });
 
-app.get('/', (req, res) => {
-  res.send('hello express')
-})
-
+app.use(express.json());
+app.use('/', indexRouter);
 app.use('/perfumes', perfumesRouter);
+
 
 app.listen(port)
